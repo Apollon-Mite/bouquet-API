@@ -1,12 +1,10 @@
 const Category = require('../models/category');
 
 const categoryController = {
-    getAllCategories: async (req, res) => {
+  getAllCategories: async (req, res) => {
     try {
       const categories = await Category.findAll({
-        order: [
-          ['id', 'ASC'],
-        ],
+        order: [['id', 'ASC']],
       });
       res.json(categories);
     } catch (error) {

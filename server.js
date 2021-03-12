@@ -50,10 +50,6 @@ app.use((request, response, next) => {
 // });
 
 app.use(upload.array());
-app.use((req, res, next) => {
-  console.log('Server received ', req.body);
-  next();
-});
 app.use(express.json());
 
 app.use(router);

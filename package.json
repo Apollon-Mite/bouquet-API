@@ -1,5 +1,5 @@
 {
-  "name": "bouquet-API",
+  "name": "bouquet-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -16,9 +16,26 @@
     "email-validator": "^2.0.4",
     "express": "^4.17.1",
     "express-jwt": "^6.0.0",
+    "joi": "^17.4.0",
     "jsonwebtoken": "^8.5.1",
     "multer": "^1.4.2",
     "pg": "^8.5.1",
     "sequelize": "^6.5.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/eslint-parser": "^7.13.10",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.21.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-config-wesbos": "^1.0.1",
+    "eslint-plugin-html": "^6.1.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "^2.2.1"
   }
 }

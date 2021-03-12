@@ -1,1 +1,3 @@
-API of the project called c'est-le-bouquet
+# bouquet-API
+
+API du site c'est le bouquet

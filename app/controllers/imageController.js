@@ -1,38 +1,35 @@
 const { Image } = require('../models');
 
 const imageController = {
-  editOneImage : async (request, response) => {
+  editOneImage: async (req, res) => {
     try {
-      const imageId = request.params.id;
+      const imageId = req.params.id;
 
       const image = await Image.findOne({
-        where : {
-          id: imageId
-        }
-      })
+        where: {
+          id: imageId,
+        },
+      });
       if (!image) {
-        return console.log('Pas d\'image avec id :',imageId )
+        return console.log("Pas d'image avec id :", imageId);
       }
-      
-      const { url, product_id} = request.body
-      
+
+      const { url, product_id } = req.body;
+
       if (url) {
-          image.url = url;
+        image.url = url;
       }
       if (product_id) {
-          image.product_id = product_id;
+        image.product_id = product_id;
       }
 
       await image.save();
 
-      response.status(200).json('Success')
-
-
+      res.status(200).json('Success');
     } catch (error) {
-      console.log('Erreur')
+      console.log('Erreur');
     }
-  }
-
-}
+  },
+};
 
 module.exports = imageController;
