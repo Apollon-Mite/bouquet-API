@@ -46,17 +46,19 @@ const productController = {
         where : {
           seller_id : sellerId
         },
-        include : ['category', 'images', {
-          model: Seller,
-          as: 'seller',
-          attributes: { exclude: ['password'] }
-        }],
+        include : ['category', 'images'],
         order: [
           ['id', 'ASC'],
         ],
-        }) 
+        })
+
+      const seller = await Seller.findByPk(sellerId, {
+        attributes: { exclude: ['password'] }
+      })
+      const result = {seller, products}
+      console.log(result)
       if (products) {
-        res.status(200).json(products)
+        res.status(200).json(result)
       }
     } catch (error) {
       console.trace(error);
