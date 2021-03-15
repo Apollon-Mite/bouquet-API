@@ -55,7 +55,7 @@ const productController = {
       const seller = await Seller.findByPk(sellerId, {
         attributes: { exclude: ['password'] }
       })
-      const result = {seller, products}
+      const result = [seller, products]
       console.log(result)
       if (products) {
         res.status(200).json(result)
