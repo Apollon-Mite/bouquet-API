@@ -146,7 +146,7 @@ const orderController = {
           console.log("APRÈS productID : ", product.id, "stock dispo: ", DDBProduct.stock, "quantité: ", product.quantity)
         }
 
-          res.status(200).json("Commande passée pour :" + totalPrice +"€")
+          res.status(200).json(order)
           
       } catch (error) {
           console.trace(error);
