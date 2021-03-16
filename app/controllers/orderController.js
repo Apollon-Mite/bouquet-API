@@ -64,14 +64,7 @@ const orderController = {
     },
     addNewOrder: async (req, res) => {
       try {
-          //const cartProducts = req.body;
-
-
-          const cartProducts = [
-            {id: 4, quantity: 2},
-            {id: 6, quantity: 1},
-            {id: 5, quantity: 2},
-          ]
+          const {cartProducts} = req.body;
 
           if (cartProducts.length<1) {
             return res.status(403).json("Panier vide");
