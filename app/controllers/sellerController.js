@@ -175,9 +175,9 @@ const sellerController = {
 
         // console.log("req.user", req.user)
         // console.log("req.user.userId", req.user.userId)
-        if (sellerId != req.user.userId || req.user.role !== 'seller') {
-          return res.status(401).json('You have no right to edit seller :' + sellerId);
-        }
+        // if (sellerId != req.user.userId || req.user.role !== 'seller') {
+        //   return res.status(401).json('You have no right to edit seller :' + sellerId);
+        // }
 
         const { email, password, passwordConfirm } = req.body;
    
