@@ -64,9 +64,9 @@ const orderController = {
     },
     addNewOrder: async (req, res) => {
       try {
-          const {cartProducts} = req.body;
+          const {cart} = req.body;
 
-          if (cartProducts.length<1) {
+          if (cart.length<1) {
             return res.status(403).json("Panier vide");
           }
 
@@ -83,7 +83,7 @@ const orderController = {
 
 
           let productIDS = [];
-          cartProducts.forEach(element => {
+          cart.forEach(element => {
             productIDS.push(element.id)
           });
 
@@ -97,7 +97,7 @@ const orderController = {
 
           let totalPrice = 0;
 
-          cartProducts.forEach((cartP) => {
+          cart.forEach((cartP) => {
             const found = productPrice.find(product => product.id == cartP.id)
             cartP.price = found.price;
 
@@ -109,7 +109,7 @@ const orderController = {
 
 
 
-        for (const product of cartProducts) {
+        for (const product of cart) {
           //On vérifie d'abord les stocks avant de passer la commande
           
           const DDBProduct = await Product.findByPk(product.id)
@@ -127,7 +127,7 @@ const orderController = {
         });
         console.log('nouveau order',order.id)
         
-        for (const product of cartProducts) {
+        for (const product of cart) {
             // tous les stocks sont bons, on peut passer la vente
             OrderHasProduct.create ({
               order_id: order.id,
