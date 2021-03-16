@@ -30,8 +30,10 @@ router.patch('/image/:id', imageController.editOneImage)
 
 /* Orders */
 router.get('/order/:id', orderController.getOneOrder);
-router.get('/seller/:id/orders', orderController.getSellerOrders);
-router.get('/customer/:id/orders', orderController.getCustomerOrders);
+router.get('/seller/:id/orders', orderController.getSellerOrders); // TODO ajouter autorization
+router.get('/customer/:id/orders', orderController.getCustomerOrders); // TODO ajouter autorization
+router.post('/customer/:id/order', orderController.addNewOrder); // NEW ORDER
+
 
 
 
@@ -51,7 +53,7 @@ router.post('/customer/signup', customerController.customerHandleSignupForm); //
 /* Sellers */
 router.get('/sellers', sellerController.getAllSellers);
 router.get('/seller/:id', sellerController.getOneSeller);
-router.patch('/seller/:id', authorization, sellerController.editSellerProfile);
+router.patch('/seller/:id', /*authorization,*/ sellerController.editSellerProfile); // TODO remettre autorisation quand images changées
 router.post('/seller/login', sellerController.sellerHandleLoginForm); // LOGIN
 router.post('/seller/signup', sellerController.sellerHandleSignupForm); // SIGNUP
 
