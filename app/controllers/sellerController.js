@@ -66,7 +66,7 @@ const sellerController = {
             //response.status(200).json(updatedSeller);
             
         } catch (error) {
-          res.status(500).json(error.toString())
+          response.status(500).json(error.toString())
         }
 
     },
@@ -77,8 +77,11 @@ const sellerController = {
 
       const {gender, email, password, passwordConfirm, lastname, firstname, phone_number, street_name, street_number, city, zipcode, picture_url, siret, shop_name, shop_presentation} = request.body;
 
-      if (!gender || !email || !password || !passwordConfirm || !lastname || !firstname || !phone_number || !street_name || !street_number || !city || !zipcode || !picture_url || !siret || !shop_name || !shop_presentation) {
+      if (!gender || !email || !password || !passwordConfirm || !lastname || !firstname || !phone_number || !street_name || !street_number || !city || !zipcode || !picture_url || !siret || !shop_name) {
         return response.status(403).json('Vous n\'avez pas rempli tous les champs');  
+      }
+      if (!shop_presentation) { // seller can add no shop_presentation
+        const shop_presentation = "";
       }
         //on checke si un utilisateur existe déjà avec cet email
         const seller = await Seller.findOne({
@@ -127,70 +130,70 @@ const sellerController = {
         
         response.status(200).json('success');
     } catch(error) {
-      res.status(500).json(error.toString())
+      response.status(500).json(error.toString())
     }
 },
 
 
-    getAllSellers: async (req, res) => {
+    getAllSellers: async (request, response) => {
     try {
       const sellers = await Seller.findAll({ 
         attributes: { exclude: ['password'] } // we don't want the password to be seen in the object we will send
       });
 
       if (!sellers) {
-        return res.status(404).json('Cant find sellers');
+        return response.status(404).json('Cant find sellers');
       }
       
-      res.json(sellers);
+      response.json(sellers);
 
     } catch (error) {
       console.trace(error);
-      res.status(500).json(error.toString());
+      response.status(500).json(error.toString());
     }
   },
 
-  getOneSeller: async (req, res) => {
+  getOneSeller: async (request, response) => {
     try {
-      const sellerId = req.params.id;
+      const sellerId = request.params.id;
       const seller = await Seller.findByPk(sellerId, {
         attributes: { exclude: ['password'] } // we don't want the password to be seen in the object we will send    
       });
       
       if (seller) {  
-        res.status(200).json(seller);
+        response.status(200).json(seller);
       
     } else {
-        res.status(404).json('Cant find seller with id ' + sellerId);
+        response.status(404).json('Cant find seller with id ' + sellerId);
       }
     } catch (error) {
       console.trace(error);
-      res.status(500).json(error.toString());
+      response.status(500).json(error.toString());
     }
   },
 
-  editSellerProfile: async (req, res) => {
+  editSellerProfile: async (request, response) => {
     try {
-        const sellerId = req.params.id;
+        const sellerId = request.params.id;
 
-        // console.log("req.user", req.user)
-        // console.log("req.user.userId", req.user.userId)
-        // if (sellerId != req.user.userId || req.user.role !== 'seller') {
-        //   return res.status(401).json('You have no right to edit seller :' + sellerId);
+        // console.log("request.user", request.user)
+        // console.log("request.user.userId", request.user.userId)
+        // if (sellerId != request.user.userId || request.user.role !== 'seller') {
+        //   return response.status(401).json('You have no right to edit seller :' + sellerId);
         // }
 
-        const { email, password, passwordConfirm } = req.body;
+        const { email, password, passwordConfirm } = request.body;
    
         let seller = await Seller.findByPk(sellerId);
         if (!seller) {
-          res.status(404).json(`Cant find seller with id ${sellerId}`);
+          response.status(404).json(`Cant find seller with id ${sellerId}`);
         } else {
 
             if (email) {
                 //on checke que l'email a un format valide
-                if (!validator.validate(req.body.email)) {
+                if (!validator.validate(request.body.email)) {
                     // the email given has not valid format 
-                    return res.status(403).json('Le format de l\'email est incorrect'); 
+                    return response.status(403).json('Le format de l\'email est incorrect'); 
                 }
                 const sellerExists = await Seller.findOne({
                     where: {
@@ -201,18 +204,18 @@ const sellerController = {
                 if (sellerExists) {
                     // il y a déjà un seller avec cet email, on envoie une erreur
                     // there is already a seller with this email => error
-                    return res.status(403).json('Un compte existe déjà avec cet email, veuillez réessayer avec un autre email');
+                    return response.status(403).json('Un compte existe déjà avec cet email, veuillez réessayer avec un autre email');
                 }
             } 
             // if we get here, it means that email format is valid and no other seller has this email
 
 
-            // on ne change que les paramètres envoyés
+            // on ne change que les paramètre envoyés
             // we patch with received data only
-            for(const element in req.body) {
+            for(const element in request.body) {
                 //console.log(element)
-                if (seller[element] && element!= 'password') { // we check that req.body doesn't contain anything unwanted, so it CAN'T contain properties that seller does not have (except passwordConfirm). We don't 
-                    seller[element] = req.body[element] // instead of having 14 conditions like ` if (email) { seller.email = email } ` this will do all the work in 2 lines
+                if (seller[element] && element!= 'password') { // we check that request.body doesn't contain anything unwanted, so it CAN'T contain properties that seller does not have (except passwordConfirm). We don't 
+                    seller[element] = request.body[element] // instead of having 14 conditions like ` if (email) { seller.email = email } ` this will do all the work in 2 lines
                     //console.log("OK pour : "+element)
                 } else {
                     //console.log(element+" n'est pas une propriété attendue ici")
@@ -221,10 +224,10 @@ const sellerController = {
 
             if (password) {
                 if (password != passwordConfirm) {
-                    return res.status(403).json('La confirmation du mot de passe a échoué');
+                    return response.status(403).json('La confirmation du mot de passe a échoué');
                 }
 
-                const hashedPwd = bcrypt.hashSync(req.body.password, 10)
+                const hashedPwd = bcrypt.hashSync(request.body.password, 10)
                 seller.password = hashedPwd;
             }
 
@@ -243,11 +246,11 @@ const sellerController = {
             attributes: { exclude: ['password'] } // we don't want the password to be seen in the object we will send 
           });
 
-          res.json(updatedSeller);
+          response.json(updatedSeller);
         }
     } catch (error) {
       console.trace(error);
-      res.status(500).json(error.toString());
+      response.status(500).json(error.toString());
     }
   },
 };

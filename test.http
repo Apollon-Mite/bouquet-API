@@ -9,20 +9,20 @@ Content-Type: application/json
 
 {
     "gender": "F",
-    "email": "abdoulatouta@gmail.com",
+    "email": "jordanie19@gmail.com",
     "password": "abdoula",
     "passwordConfirm" : "abdoula",
-    "lastname": "Exploratrice",
-    "firstname": "Dora",
+    "lastname": "Jordanie",
+    "firstname": "Islande",
     "phone_number": "0661737865",
     "street_name": "boulevard Tokyo",
     "street_number": "13",
     "city": "Paris",
     "zipcode": "75000",
     "picture_url": "https://img-4.linternaute.com/lUM_6jl2EZ6NpWNkH70wj25s0aw=/1240x/1b2dbaad11b84ee8bde02cfcd0b823dd/ccmcms-linternaute/83141.jpg",
-    "siret": "823656001999992",
+    "siret": "82365600199999",
     "shop_name": "Chez David",
-    "shop_presentation": "Je suis vendeur de légumes reconverti dans les roses"
+    "shop_presentation": ""
 }
 
 ### création d'un compte customer
