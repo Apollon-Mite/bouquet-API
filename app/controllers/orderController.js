@@ -24,13 +24,16 @@ const orderController = {
     try {
         const sellerId = req.params.id;
         const orders = await Order.findAll({ 
-            include: [{
-                model : Product,
-                as: 'products',
-                where : {
-                    'seller_id' : sellerId
-                }
-            }]
+          order: [
+            ['id', 'DESC'],
+          ],
+          include: [{
+              model : Product,
+              as: 'products',
+              where : {
+                  'seller_id' : sellerId
+              }
+          }]
         })
         if (orders) {
             res.status(200).json(orders)
@@ -48,6 +51,9 @@ const orderController = {
                 where : {
                     'customer_id' : customerId
                 },
+                order: [
+                  ['id', 'DESC'],
+                ],
                 include: [{  
                     model : Product,
                     as: 'products',
