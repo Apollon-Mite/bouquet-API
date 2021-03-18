@@ -67,7 +67,7 @@ const orderController = {
           const {cart} = req.body;
 
           if (cart.length<1) {
-            return res.status(403).json("Panier vide");
+            return res.status(200).json("Panier vide");
           }
 
           const customerId = req.params.id;
@@ -108,8 +108,7 @@ const orderController = {
           totalPrice = (totalPrice).toFixed(2)
 
         for (const product of cart) {
-          //On vérifie d'abord les stocks avant de passer la commande
-          
+          //On vérifie d'abord les stocks avant de passer la commande          
           const DDBProduct = await Product.findByPk(product.id)
           if (DDBProduct.stock < product.quantity) {
             return res.status(200).json("ACHAT ANNULÉ : pas assez de stock pour:"+ DDBProduct.name )
