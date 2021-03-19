@@ -113,33 +113,45 @@ const productController = {
     }
   },
 
-  // editOneProduct : async (request, response) => {
-  //   try {
-  //     const sellerId = request.params.Sid;
-  //     const productId = request.params.Pid;
+  editOneProduct : async (request, response) => {
+    try {
+      // const sellerId = request.params.Sid;
+      const productId = request.params.id;
 
-  //     // const product = await Product.findOne({
-  //     //   where : {
-  //     //     id: productID
-  //     //   }
-  //     // })
+      const product = await Product.findOne({
+        where : {
+          id: productId
+        }
+      })
 
-  //     // { url, product_id}
+      const { name, description, stock, prix} = request.body
       
-  //     // if (firstname) {
-  //     //     product.url = url;
-  //     // }
-  //     // if (lastname) {
-  //     //     customer.lastname = lastname;
-  //     // }
-  //     //await customer.save();
+
+      if (name) {
+          product.name = name;
+      }
+
+      if (description) {
+        product.description = description;
+    }
+
+      if (stock) {
+          product.stock = stock;
+      }
+
+      if (prix) {
+        product.prix = prix;
+    }
+
+
+      await product.save();
 
 
 
-  //   } catch (error) {
-  //     console.log('Erreur')
-  //   }
-  // }
+    } catch (error) {
+      console.error(error)
+    }
+  }
 };
 
 module.exports = productController;

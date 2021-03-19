@@ -23,7 +23,9 @@ router.get('/products', productController.getAllProducts);
 router.get('/product/:id', productController.getOneProduct);
 router.get('/seller/:id/products', productController.getProductsFromSeller);
 router.post('/seller/:id/products', authorization, productController.addNewProduct)
-// router.patch('/seller/:Sid/product/:Pid', productController.editOneProduct)
+router.patch('/product/:id', productController.editOneProduct) // crée juste pour nous
+
+// router.patch('/seller/:Sid/product/:Pid', productController.editOneProduct) // faudra ajouter la vérification par token ici
 
 router.patch('/image/:id', imageController.editOneImage)
 
