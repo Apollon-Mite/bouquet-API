@@ -9,11 +9,11 @@ Content-Type: application/json
 
 {
     "gender": "F",
-    "email": "jordanie19@gmail.com",
+    "email": "jordanie123@gmail.com",
     "password": "abdoula",
     "passwordConfirm" : "abdoula",
-    "lastname": "Jordanie",
-    "firstname": "Islande",
+    "lastname": "Katana",
+    "firstname": "Shimeyu",
     "phone_number": "0661737865",
     "street_name": "boulevard Tokyo",
     "street_number": "13",
@@ -31,7 +31,7 @@ Content-Type: application/json
 
 {
   "gender": "F",
-  "email": "nano@gmail.com",
+  "email": "nanotechno@gmail.com",
   "password": "abdoula",
   "passwordConfirm" : "abdoula",
   "lastname": "Backeux",
@@ -49,7 +49,7 @@ POST http://localhost:3000/seller/login
 Content-Type: application/json
 
 {
-    "email": "abdoulat@gmail.com",
+    "email": "jordanie123@gmail.com",
     "password": "abdoula"
 }
 
@@ -59,7 +59,7 @@ POST http://localhost:3000/customer/login
 Content-Type: application/json
 
 {
-    "email": "nano@gmail.com",
+    "email": "nanotechno@gmail.com",
     "password": "abdoula"
 }
 

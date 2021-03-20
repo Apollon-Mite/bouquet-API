@@ -32,7 +32,8 @@ const orderController = {
               as: 'products',
               where : {
                   'seller_id' : sellerId
-              }
+              },
+              include: 'images'
           }]
         })
         if (orders) {
@@ -57,7 +58,7 @@ const orderController = {
                 include: [{  
                     model : Product,
                     as: 'products',
-                    
+                    include: 'images'
                 }]
             })
             if (orders) {
