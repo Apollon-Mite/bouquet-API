@@ -31,7 +31,7 @@ const sellerController = {
             // the seller with this email exists, let's compare received password with the hashed one in database
             
             // bcrypt can check if 2 passwords are the same, the password entered by user and the one in database 
-            const validPwd = bcrypt.compareSync(request.body.password, seller.dataValues.password);
+            const validPwd = await bcrypt.compare(request.body.password, seller.dataValues.password);
 
             if (!validPwd) {
                 // password is not correct, we send an error
@@ -106,7 +106,7 @@ const sellerController = {
             return response.status(403).json('La confirmation du mot de passe a échoué');
         }
         // we hash password
-        const hashedPwd = bcrypt.hashSync(password, 10)
+        const hashedPwd = await bcrypt.hash(password, 10)
         
 
         // we add the new seller in database
