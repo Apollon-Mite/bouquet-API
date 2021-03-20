@@ -140,10 +140,11 @@ Content-Type: application/json
 POST http://localhost:3000/customer/3/order
 Content-Type: application/json
 
-
+###
 PATCH http://localhost:3000/product/3
 Content-Type: application/json
 
 {
-  "name": "Les délicates" 
+  "name": "Les délicates",
+  "stock": 32
 }

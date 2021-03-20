@@ -4,14 +4,17 @@ const productController = {
   getAllProducts: async (req, res) => {
     try {
       const products = await Product.findAll({ 
-        order: [['id', 'ASC']],       
-        include : ['category', 'images', {
+        order: [
+          ['id', 'ASC'],
+          ['images', 'id', 'ASC']
+        ],       
+        include : ['category', 'images',
+        {
           model: Seller,
           as: 'seller',
           attributes: { exclude: ['password'] }
         }]
         });
-        
       res.json(products);
     } catch (error) {
       console.trace(error);
@@ -22,7 +25,10 @@ const productController = {
   getOneProduct: async (req, res) => {
      try {
         const productId = req.params.id;
-        const product = await Product.findByPk(productId, {        
+        const product = await Product.findByPk(productId, { 
+          order: [
+            ['images', 'id', 'ASC']
+          ],        
           include : ['category', 'images', {
             model: Seller,
             as: 'seller',
@@ -50,7 +56,8 @@ const productController = {
         include : ['category', 'images'],
         order: [
           ['id', 'ASC'],
-        ],
+          ['images', 'id', 'ASC']
+        ], 
         })
 
       const seller = await Seller.findByPk(sellerId, {

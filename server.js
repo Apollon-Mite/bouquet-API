@@ -1,10 +1,10 @@
 const dotenv = require('dotenv');
 dotenv.config();
+const sanitizer = require('sanitizer');
 const multer = require('multer'); // pour pouvoir recevoir des données dans le serveur API à partir d'un utilisateur extérieur
 const upload = multer();
 const express = require('express');
 const router = require('./app/router');
-
 const cors = require('cors');
 
 const PORT = process.env.PORT || 5050;
@@ -50,11 +50,19 @@ app.use((request, response, next) => {
 // });
 
 app.use(upload.array());
+
 app.use((req, res, next) => {
   console.log('Server received ', req.body);
+
+  for (let prop in req.body) {
+    req.body[prop] = sanitizer.escape(req.body[prop]) //added sanitizer
+  }
   next();
 });
+
 app.use(express.json());
+
+
 
 app.use(router);
 
