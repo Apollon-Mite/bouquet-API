@@ -138,7 +138,9 @@ const sellerController = {
     getAllSellers: async (request, response) => {
     try {
       const sellers = await Seller.findAll({ 
-        attributes: { exclude: ['password'] } // we don't want the password to be seen in the object we will send
+        attributes: { exclude: ['password'], // we don't want the password to be seen in the object we will send
+        order: [['id', 'ASC']]
+      } 
       });
 
       if (!sellers) {
