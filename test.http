@@ -117,7 +117,6 @@ Content-Type: application/json
 Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInJvbGUiOiJzZWxsZXIiLCJpYXQiOjE2MTYzMTY5NDIsImV4cCI6MTYxNjMyNzc0Mn0.CmlSaW6gXuZzYqTChPH5TArsidWEtrhBBtxz3kkotbY
 
 {
-  "reference": "02020203",
   "name": "Tasmanie",
   "description": "Le bouquet composé en Australie",
   "stock": "11",

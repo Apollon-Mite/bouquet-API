@@ -93,7 +93,7 @@ const productController = {
       const seconde = now.getSeconds();
       const reference = "" + sellerId + mois + annee + jour + heure + minute + seconde;
 
-      // images must be an array
+      
       if(reference && name && description && stock && price && sellerId && category_id && image) {
         const newProduct = await Product.create({
           reference: reference,
@@ -112,7 +112,7 @@ const productController = {
         })  
         
 
-        // If several images are uploaded
+        // If several images are uploaded, images must be an array ["image1", "image2", ...]
         // for (const image of images) {
         //   await Image.create({
         //     url: image,

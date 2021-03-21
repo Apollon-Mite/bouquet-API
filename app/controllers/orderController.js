@@ -28,13 +28,18 @@ const orderController = {
             ['id', 'DESC'],
           ],
           include: [{
-              model : Product,
-              as: 'products',
-              where : {
-                  'seller_id' : sellerId
-              },
-              include: 'images'
-          }]
+            model : Product,
+            as: 'products',
+            where : {
+              'seller_id' : sellerId
+            },
+            include: 'images'
+            }, 
+            {
+              model: Customer,
+              as: 'customer',
+              attributes: { exclude: ['password']}
+            }]
         })
         if (orders) {
             res.status(200).json(orders)
