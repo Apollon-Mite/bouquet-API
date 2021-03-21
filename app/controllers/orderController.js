@@ -64,7 +64,12 @@ const orderController = {
                     model : Product,
                     as: 'products',
                     include: 'images'
-                }]
+                  }, 
+                  {
+                    model: Customer,
+                    as: 'customer',
+                    attributes: { exclude: ['password']}
+                  }]
             })
             if (orders) {
                 res.status(200).json(orders)
