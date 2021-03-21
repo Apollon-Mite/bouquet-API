@@ -112,19 +112,19 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsInJvb
 
 
 ### Ajouter un nouveau produit
-POST http://localhost:3000/seller/4/products
+POST http://localhost:3000/seller/9/products
 Content-Type: application/json
-Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInJvbGUiOiJzZWxsZXIiLCJpYXQiOjE2MTUyMzM3MTYsImV4cCI6MTYxNTI0NDUxNn0.vjf9_aMkAIG20aJQCtczcNW82kMwSPrLqHLoda4mx3k
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInJvbGUiOiJzZWxsZXIiLCJpYXQiOjE2MTYzMTY5NDIsImV4cCI6MTYxNjMyNzc0Mn0.CmlSaW6gXuZzYqTChPH5TArsidWEtrhBBtxz3kkotbY
 
 {
   "reference": "02020203",
-  "name": "Verne",
-  "description": "Le bouquet composé par Jules Verne",
-  "stock": "72",
-  "price": "78.00",
+  "name": "Tasmanie",
+  "description": "Le bouquet composé en Australie",
+  "stock": "11",
+  "price": "99.00",
   "seller_id": "1",
   "category_id": "1",
-  "images": ["https://www.topdecomobilier.com/12546-thickbox_default/bouquet-de-18-fleurs-blanches-h50.jpg"]
+  "image": "https://www.topdecomobilier.com/12546-thickbox_default/bouquet-de-18-fleurs-blanches-h50.jpg"
 }
 
 

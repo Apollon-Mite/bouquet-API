@@ -82,32 +82,43 @@ const productController = {
         return response.status(401).json('You have no right to make this action');
       }
 
-      const {reference , name , description , stock , price , seller_id , category_id , images} = request.body;
+      const { name , description , stock , price , category_id , image} = request.body;
       
+      const now = new Date();
+      const annee   = now.getFullYear();
+      const mois    = now.getMonth() + 1;
+      const jour    = now.getDate();
+      const heure   = now.getHours();
+      const minute  = now.getMinutes();
+      const seconde = now.getSeconds();
+      const reference = "" + sellerId + mois + annee + jour + heure + minute + seconde;
+
       // images must be an array
-      if(reference && name && description && stock && price && seller_id && category_id && images) {
-        await Product.create({
+      if(reference && name && description && stock && price && sellerId && category_id && image) {
+        const newProduct = await Product.create({
           reference: reference,
           name: name,
           description: description,
           stock: stock,
           price: price,
-          seller_id: seller_id,
+          seller_id: sellerId,
           category_id: category_id
         });
 
-        let number;
-        await Product.count().then(num => {
-          number = num
-        })
-
+        //if one image is uploaded
+        await Image.create({
+          url: image,
+          product_id: newProduct.id
+        })  
         
-        for (const image of images) {
-          await Image.create({
-            url: image,
-            product_id: number
-          })         
-        }
+
+        // If several images are uploaded
+        // for (const image of images) {
+        //   await Image.create({
+        //     url: image,
+        //     product_id: newProduct.id
+        //   })         
+        // }
         
         response.status(200).json('success');
       } else {
