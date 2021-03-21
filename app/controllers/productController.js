@@ -142,7 +142,7 @@ const productController = {
         }
       })
 
-      const { name, description, stock, prix} = request.body
+      const { name, description, stock, price} = request.body
       
 
       if (name) {
@@ -157,8 +157,8 @@ const productController = {
           product.stock = stock;
       }
 
-      if (prix) {
-        product.prix = prix;
+      if (price) {
+        product.price = price;
     }
 
 
