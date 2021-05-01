@@ -20,28 +20,24 @@ router.get('/', (req, res) => {
 
 /** Products */
 router.get('/products', productController.getAllProducts);
-router.get('/product/:id(\\d+)', productController.getOneProduct);
+router.get('/product/:id(\\d+)', productController.getOneProduct); /* (\\d+) est du regex, il signifie que le ID doit être un entier positif */
 router.get('/seller/:id(\\d+)/products', productController.getProductsFromSeller);
 router.post('/seller/:id(\\d+)/products', authorization, productController.addNewProduct)
-router.patch('/product/:id(\\d+)', productController.editOneProduct) // crée juste pour nous
+// router.patch('/product/:id(\\d+)', productController.editOneProduct) // TODO ajouter autorization
+// router.patch('/seller/:Sid/product/:Pid', productController.editOneProduct) // TODO ajouter autorization
 
-// router.patch('/seller/:Sid/product/:Pid', productController.editOneProduct) // faudra ajouter la vérification par token ici
-
-router.patch('/image/:id(\\d+)', imageController.editOneImage)
+// router.patch('/image/:id(\\d+)', imageController.editOneImage) // TODO ajouter autorization
 
 
 /* Orders */
 router.get('/order/:id(\\d+)', orderController.getOneOrder);
 router.get('/seller/:id(\\d+)/orders', orderController.getSellerOrders); // TODO ajouter autorization
 router.get('/customer/:id(\\d+)/orders', orderController.getCustomerOrders); // TODO ajouter autorization
-router.post('/customer/:id(\\d+)/order', orderController.addNewOrder); // NEW ORDER
-
-
+router.post('/customer/:id(\\d+)/order', orderController.addNewOrder); // NEW ORDER // TODO ajouter autorization
 
 
 /* Categories */
 router.get('/categories', categoryController.getAllCategories);
-
 
 
 /* Customers */
@@ -58,7 +54,6 @@ router.get('/seller/:id(\\d+)', sellerController.getOneSeller);
 router.patch('/seller/:id(\\d+)', /*authorization,*/ sellerController.editSellerProfile); // TODO remettre autorisation quand images changées
 router.post('/seller/login', sellerController.sellerHandleLoginForm); // LOGIN
 router.post('/seller/signup', sellerController.sellerHandleSignupForm); // SIGNUP
-
 
 
 router.use((req, res) => {
